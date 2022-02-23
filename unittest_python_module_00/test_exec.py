@@ -1,5 +1,5 @@
 import unittest
-from ex00.exec import exec
+from ex01.exec import exec
 
 
 class ExecTest(unittest.TestCase):
@@ -52,6 +52,18 @@ class ExecTest(unittest.TestCase):
     def test_two_string_with_one_space_argument(self):
         self.argv.extend([' ', ' '])
         self.assertEqual(exec(self.argv), '')
+
+    def test_one_no_printable_string_argument(self):
+        self.argv.extend(["\n"])
+        self.assertEqual(exec(self.argv), "\n")
+
+    def test_two_no_printable_string_argument(self):
+        self.argv.extend(["\n", "\n"])
+        self.assertEqual(exec(self.argv), "\n \n")
+
+    def test_two_no_printable_and_one_empty_string_argument(self):
+        self.argv.extend(["\n", '', "\n"])
+        self.assertEqual(exec(self.argv), "\n \n")
 
 
 if __name__ == '__main__':
