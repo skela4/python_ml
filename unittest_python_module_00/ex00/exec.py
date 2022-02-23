@@ -10,7 +10,7 @@ def join_rev_strings(strings):
         s = s.strip(string.whitespace).swapcase()
         if len(s) > 0:
             result.append(s)
-    print('[DEBUG] ==> result: ', result, end='\n')
+    # print('[DEBUG] ==> result: ', result, end='\n')
     return " ".join(result)[::-1]
 
 
