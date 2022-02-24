@@ -8,4 +8,4 @@ fi
 
 $MYPATH/bin/conda init zsh && $MYPATH/bin/conda config --set auto_activate_base false && source ~/.zshrc
 
-conda create --name 42AI-$USER python=3.7 jupyter pandas pycodestyle && conda activate 42AI-$USER && rm 
+conda create --name 42AI-$USER python=3.7 jupyter pandas pycodestyle && conda activate 42AI-$USER
