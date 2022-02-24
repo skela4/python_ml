@@ -14,7 +14,7 @@ class ExecTest(unittest.TestCase):
         self.assertEqual(exec(self.argv), f"Usage: {self.argv[0]} STRING...")
 
     def test_one_argument(self):
-        self.argv.extend = ['L337 5P3AK!']
+        self.argv.extend(['L337 5P3AK!'])
         self.assertEqual(exec(self.argv), '!ka3p5 733l')
 
         self.argv[1:] = ['Hello World!']
@@ -22,6 +22,33 @@ class ExecTest(unittest.TestCase):
 
         self.argv[1:] = ['0123456789']
         self.assertEqual(exec(self.argv), '9876543210')
+
+        self.argv[1:] = ['']
+        self.assertEqual(exec(self.argv), '')
+
+        self.argv[1:] = [' ']
+        self.assertEqual(exec(self.argv), ' ')
+
+        self.argv[1:] = ['      ']
+        self.assertEqual(exec(self.argv), '      ')
+
+        self.argv[1:] = ['test ']
+        self.assertEqual(exec(self.argv), ' TSET')
+
+        self.argv[1:] = ['test        ']
+        self.assertEqual(exec(self.argv), '        TSET')
+
+        self.argv[1:] = [' test']
+        self.assertEqual(exec(self.argv), 'TSET ')
+
+        self.argv[1:] = ['        test']
+        self.assertEqual(exec(self.argv), 'TSET        ')
+
+        self.argv[1:] = [' test ']
+        self.assertEqual(exec(self.argv), ' TSET ')
+
+        self.argv[1:] = ['        test        ']
+        self.assertEqual(exec(self.argv), '        TSET        ')
 
     def test_two_argument(self):
         self.argv.extend(['L337', '5P3AK!'])
@@ -31,17 +58,72 @@ class ExecTest(unittest.TestCase):
         self.assertEqual(exec(self.argv), '!DLROw OLLEh')
 
         self.argv[1:] = ['01234', '56789']
-        self.assertEqual(exec(self.argv), '9876543210')
+        self.assertEqual(exec(self.argv), '98765 43210')
+
+        self.argv[1:] = ['L337   ', '5P3AK!   ']
+        self.assertEqual(exec(self.argv), '   !ka3p5 733l')
+
+        self.argv[1:] = ['Hello   ', 'World!   ']
+        self.assertEqual(exec(self.argv), '   !DLROw OLLEh')
+
+        self.argv[1:] = ['01234   ', '56789   ']
+        self.assertEqual(exec(self.argv), '   98765 43210')
+
+        self.argv[1:] = ['   L337', '   5P3AK!']
+        self.assertEqual(exec(self.argv), '!ka3p5 733l   ')
+
+        self.argv[1:] = ['   Hello', '   World!']
+        self.assertEqual(exec(self.argv), '!DLROw OLLEh   ')
+
+        self.argv[1:] = ['   01234', '   56789']
+        self.assertEqual(exec(self.argv), '98765 43210   ')
+
+        self.argv[1:] = ['   L337   ', '   5P3AK!   ']
+        self.assertEqual(exec(self.argv), '   !ka3p5 733l   ')
+
+        self.argv[1:] = ['   Hello   ', '   World!   ']
+        self.assertEqual(exec(self.argv), '   !DLROw OLLEh   ')
+
+        self.argv[1:] = ['   01234   ', '   56789   ']
+        self.assertEqual(exec(self.argv), '   98765 43210   ')
+
+        self.argv[1:] = ['   L337   ', '']
+        self.assertEqual(exec(self.argv), '   733l   ')
+
+        self.argv[1:] = ['   Hello   ', '   World!   ']
+        self.assertEqual(exec(self.argv), '   !DLROw OLLEh   ')
+
+        self.argv[1:] = ['   01234   ', '   56789   ']
+        self.assertEqual(exec(self.argv), '   98765 43210   ')
 
     def test_three_argument(self):
         self.argv.extend(['L337', '', '5P3AK!'])
         self.assertEqual(exec(self.argv), '!ka3p5 733l')
 
-        self.argv[1:] = ['Hello', '', 'World!']
-        self.assertEqual(exec(self.argv), '!DLROw OLLEh')
+        self.argv.extend(['', 'L337', '5P3AK!'])
+        self.assertEqual(exec(self.argv), '!ka3p5 733l')
 
-        self.argv[1:] = ['01234', '', '56789']
-        self.assertEqual(exec(self.argv), '9876543210')
+        self.argv.extend(['L337', '5P3AK!', ''])
+        self.assertEqual(exec(self.argv), '!ka3p5 733l')
+
+        self.argv.extend(['L337', '  ', '5P3AK!'])
+        self.assertEqual(exec(self.argv), '!ka3p5 733l')
+
+        self.argv.extend(['  ', 'L337', '5P3AK!'])
+        self.assertEqual(exec(self.argv), '!ka3p5 733l')
+
+        self.argv.extend(['L337', '5P3AK!', '  '])
+        self.assertEqual(exec(self.argv), '!ka3p5 733l')
+
+        self.argv.extend(['  L337', '  ', '5P3AK!'])
+        self.assertEqual(exec(self.argv), '!ka3p5 733l')
+
+        self.argv.extend(['  ', '  L337', '5P3AK!'])
+        self.assertEqual(exec(self.argv), '!ka3p5 733l')
+
+        self.argv.extend(['  L337', '5P3AK!', '  '])
+        self.assertEqual(exec(self.argv), '!ka3p5 733l')
+        
 
 
 
