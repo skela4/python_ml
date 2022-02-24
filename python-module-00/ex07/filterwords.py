@@ -7,10 +7,11 @@ if __name__ == "__main__":
     try:
         assert len(args) == 2
         str = args[0]
-        n = int(args[1], 10)
-    except:
+        n = int(args[1])
+    except Exception:
         raise SystemExit("Error")
 
     results = re.split(r'\W+', str)
-    results = [result for result in results if len(result) > n ]
+    # print (results)
+    results = [result for result in results if len(result) > n]
     print(results)

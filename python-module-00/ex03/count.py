@@ -1,3 +1,4 @@
+from cgitb import text
 import string
 
 dict_char = {
@@ -29,8 +30,7 @@ lower characters, punctuation and spaces in a given text"""
         raise SystemExit("ERROR")
 
     if len(text) == 0:
-        while len(text) == 0:
-            text = input('What is the text to analyse?\n')
+        text = input('What is the text to analyse?\n')
 
     list(map(count, text))
     print(f"The text contains {dict_char['total']} characters")
@@ -38,3 +38,8 @@ lower characters, punctuation and spaces in a given text"""
     print(f"- {dict_char['lower']} lowers letters")
     print(f"- {dict_char['punc']} punctuation marks")
     print(f"- {dict_char['space']} spaces")
+
+
+if __name__ == "__main__":
+    print(text_analyzer("vfdvc"))
+    print(text_analyzer("vfdvc"))

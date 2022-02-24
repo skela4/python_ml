@@ -1,3 +1,7 @@
+import string
+import re
+
+
 cookbook = {
     'sandwich': {
         'ingredients': ['ham', 'bread', 'cheese', 'tomatoes'],
@@ -15,6 +19,11 @@ cookbook = {
         'prep_time': 15
     }
 }
+
+
+def not_empty_string(str):
+    return len(str) > 0
+
 
 def print_dict_keys(cookbook):
     if isinstance(cookbook, dict):
@@ -35,7 +44,9 @@ def print_dict_items(cookbook):
 
 
 def print_recipe(recipe):
-    if recipe not in cookbook.keys():
+    if len(cookbook) == 0:
+        print("cookbook is empty")
+    elif recipe not in cookbook.keys():
         print("recipe not in cookbook")
     else:
         print(f"Recipe for {recipe}:")
@@ -51,63 +62,92 @@ def delete_recipe(recipe):
         print(f"Deleting {recipe} from cookbook:")
         del cookbook[recipe]
         print_dict_items(cookbook)
-#TODO meilleur split des ingredients
+
+
 def add_recipe(recipe, ingredients, meal, prep_time):
-    if recipe in cookbook.keys():
+    delimiters = "|".join(string.whitespace)
+    recipe = recipe.strip(string.whitespace)
+    meal = meal.strip(string.whitespace)
+    ingredients = re.sub(f'[{string.punctuation}]', '', ingredients)
+    ingredients = list(
+        filter(not_empty_string, re.split(delimiters, ingredients)))
+    prep_time = prep_time.strip(string.whitespace)
+    if len(recipe) == 0:
+        print("recipe name cannot be empty")
+    elif len(ingredients) == 0:
+        print("need a least one ingredient")
+    elif len(meal) == 0:
+        print("meal name cannot be empty")
+    elif not prep_time.isdigit() or len(prep_time) == 0:
+        print("all characters in the sting need to be a digit and need at \
+        least one character")
+    elif recipe in cookbook.keys():
         print("recipe already in cookbook")
     else:
-        print(f"Adding {recipe} in cookbook:")
         cookbook[recipe] = {
             'ingredients': ingredients,
             'meal': meal,
             'prep_time': prep_time
         }
+        print(f"Adding {recipe} in cookbook:")
         print_dict_items(cookbook)
 
 
 def print_all_recipes():
-    print("Listing cookbook recipe:")
-    print_dict_keys(cookbook)
+    if len(cookbook) > 0:
+        print("Listing cookbook recipe:")
+        print_dict_keys(cookbook)
+    else:
+        print("cookbook is empty")
 
-import string
+
+def print_options(list_options):
+    print("Please select an option by typing the corresponding number:")
+    for option_number, option_text in list_options.items():
+        print(f"{option_number}: {option_text}")
+
+
 def program_cookbook():
     list_options = {
         '1': 'Add a recipe',
         '2': 'Delete a recipe',
         '3': 'Print a recipe',
-        '4': 'Print the cookbook', 
-        '5': 'Quit',
+        '4': 'Print the cookbook',
+        '5': 'Quit'
         }
-    print("Please select an option by typing the corresponding number:")
-    for option_number, option_text in list_options.items():
-                print(f"{option_number}: {option_text}")
+
+    print_options(list_options)
     user_input = input()
-    while user_input != None and user_input not in list_options.keys():
-        print("This option does not exist, please type the corresponding number.")
-        print("To exit, enter 5")
-        for option_number, option_text in list_options.items():
-            print(f"{option_number}: {option_text}")
+    while user_input != '5':
+        while user_input is not None and user_input not in list_options.keys():
+            print("This option does not exist, \
+            please type the corresponding number.")
+            print("To exit, enter 5\n")
+            for option_number, option_text in list_options.items():
+                print(f"{option_number}: {option_text}")
+            user_input = input()
+        if (user_input == '1'):
+            recipe = input("\nRecipe name:\n")
+            ingredients = input("ingredients:\n")
+            meal_type = input("Type of meal:\n")
+            prep_time = input("Time of prep:\n")
+            add_recipe(recipe, ingredients, meal_type, prep_time)
+            print()
+        elif (user_input == '2'):
+            recipe = input("\nRecipe to delete:\n\n")
+            delete_recipe(recipe)
+            print()
+        elif (user_input == '3'):
+            recipe = input('\nRecipe name:\n\n')
+            print_recipe(recipe)
+            print()
+        elif (user_input == '4'):
+            print("\n")
+            print_all_recipes()
+            print()
+        print_options(list_options)
         user_input = input()
-    
-    if (user_input == '1'):
-        recipe = input("\nRecipe name:\n")
-        ingredients = input("ingredients:\n")
-        ingredients = ingredients.split(',')
-        meal_type = input("Type of meal:\n")
-        prep_time = input("Time of prep:\n")
-        add_recipe(recipe, ingredients, meal_type, prep_time)
-    elif (user_input == '2'):
-        recipe = input("\nRecipe to delete:\n\n")
-        delete_recipe(recipe)
-    elif (user_input == '3'):
-        recipe = input('\nRecipe name:\n\n')
-        print_recipe(recipe)
-    elif (user_input == '4'):
-        print("\n")
-        print_all_recipes()
-    elif (user_input == '5'):
-        print("\ncookbook closed")
-        exit(0)
+    print("\ncookbook closed")
 
 
 if __name__ == "__main__":

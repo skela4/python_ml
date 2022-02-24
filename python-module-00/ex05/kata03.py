@@ -1,6 +1,6 @@
 if __name__ == "__main__":
-    phrase = "The right format%"
+    phrase = "format"
     try:
-        print(phrase.rjust(41, "-"))
+        print(phrase.rjust(42, "-"), end='')
     except Exception as msg:
         print(msg)

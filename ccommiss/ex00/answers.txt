@@ -1,4 +1,0 @@
-conda list
-python -m pip show numpy -v
-python -m pip search --index https://pypi.org/pypi tesseract
-python -m pip freeze > requirements.txt

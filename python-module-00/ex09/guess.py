@@ -14,8 +14,7 @@ def guess():
     intro()
     found = 0
     attempt = 1
-    num_to_guess = 42
-    # num_to_guess = randint(1, 99)
+    num_to_guess = randint(1, 99)
     while found == 0:
         number = input("What's your guess between 1 and 99?\n")
         if number == 'exit':

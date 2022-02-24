@@ -21,13 +21,6 @@ def check_args(args):
         raise SystemExit(usage())
 
     try:
-        assert args[0].isdigit() and args[1].isdigit(),\
-            "InputError: only numbers\n"
-    except AssertionError as msg:
-        print(msg)
-        raise SystemExit(usage())
-
-    try:
         return (int(args[0]), int(args[1]))
     except ValueError as msg:
         print("InputError: only numbers\n")

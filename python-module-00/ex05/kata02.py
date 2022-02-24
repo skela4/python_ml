@@ -2,7 +2,7 @@ from datetime import datetime
 
 
 if __name__ == "__main__":
-    t = (3, 30, 2019, 9, 25)
+    t = (3, 0, 19, 9, 25, 78, 789)
     hour, minutes, year, month, day = t
     try:
         print(

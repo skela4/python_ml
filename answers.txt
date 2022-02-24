@@ -1,3 +1,0 @@
-python -m pip list
-python -m pip show numpy -v
-python -m pip search -vvv --index https://pypi.org/pypi tesseract
