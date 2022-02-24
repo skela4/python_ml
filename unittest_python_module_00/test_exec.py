@@ -100,29 +100,29 @@ class ExecTest(unittest.TestCase):
         self.argv.extend(['L337', '', '5P3AK!'])
         self.assertEqual(exec(self.argv), '!ka3p5 733l')
 
-        self.argv.extend(['', 'L337', '5P3AK!'])
+        self.argv[1:] = ['', 'L337', '5P3AK!']
         self.assertEqual(exec(self.argv), '!ka3p5 733l')
 
-        self.argv.extend(['L337', '5P3AK!', ''])
+        self.argv[1:] = ['L337', '5P3AK!', '']
         self.assertEqual(exec(self.argv), '!ka3p5 733l')
 
-        self.argv.extend(['L337', '  ', '5P3AK!'])
+        self.argv[1:] = ['L337', '  ', '5P3AK!']
         self.assertEqual(exec(self.argv), '!ka3p5 733l')
 
-        self.argv.extend(['  ', 'L337', '5P3AK!'])
+        self.argv[1:] = ['  ', 'L337', '5P3AK!']
         self.assertEqual(exec(self.argv), '!ka3p5 733l')
 
-        self.argv.extend(['L337', '5P3AK!', '  '])
+        self.argv[1:] = ['L337', '5P3AK!', '  ']
         self.assertEqual(exec(self.argv), '!ka3p5 733l')
 
-        self.argv.extend(['  L337', '  ', '5P3AK!'])
-        self.assertEqual(exec(self.argv), '!ka3p5 733l')
+        self.argv[1:] = ['  L337', '  ', '5P3AK!']
+        self.assertEqual(exec(self.argv), '!ka3p5 733l  ')
 
-        self.argv.extend(['  ', '  L337', '5P3AK!'])
-        self.assertEqual(exec(self.argv), '!ka3p5 733l')
+        self.argv[1:] = ['  ', '  L337', '5P3AK!']
+        self.assertEqual(exec(self.argv), '!ka3p5 733l  ')
 
-        self.argv.extend(['  L337', '5P3AK!', '  '])
-        self.assertEqual(exec(self.argv), '!ka3p5 733l')
+        self.argv[1:] = ['  L337', '5P3AK!', '  ']
+        self.assertEqual(exec(self.argv), '!ka3p5 733l  ')
         
 
 
