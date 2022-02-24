@@ -14,61 +14,35 @@ class ExecTest(unittest.TestCase):
         self.assertEqual(exec(self.argv), f"Usage: {self.argv[0]} STRING...")
 
     def test_one_argument(self):
-        self.argv.extend(['Hello World!'])
+        self.argv.extend = ['L337 5P3AK!']
+        self.assertEqual(exec(self.argv), '!ka3p5 733l')
+
+        self.argv[1:] = ['Hello World!']
         self.assertEqual(exec(self.argv), '!DLROw OLLEh')
 
-        self.argv[1:] = ['        Hello World!        ']
-        self.assertEqual(exec(self.argv), '        !DLROw OLLEh        ')
+        self.argv[1:] = ['0123456789']
+        self.assertEqual(exec(self.argv), '9876543210')
 
-        self.argv[1:] = ['        Hello              World!        ']
-        self.assertEqual(exec(self.argv), '        !DLROw              OLLEh        ')
+    def test_two_argument(self):
+        self.argv.extend(['L337', '5P3AK!'])
+        self.assertEqual(exec(self.argv), '!ka3p5 733l')
 
-        self.argv[1:] = ['']
-        self.assertEqual(exec(self.argv), '')
+        self.argv[1:] = ['Hello', 'World!']
+        self.assertEqual(exec(self.argv), '!DLROw OLLEh')
 
-        self.argv[1:] = [' ']
-        self.assertEqual(exec(self.argv), ' ')
+        self.argv[1:] = ['01234', '56789']
+        self.assertEqual(exec(self.argv), '9876543210')
 
-        self.argv[1:] = ['                     ']
-        self.assertEqual(exec(self.argv), '                     ')
+    def test_three_argument(self):
+        self.argv.extend(['L337', '', '5P3AK!'])
+        self.assertEqual(exec(self.argv), '!ka3p5 733l')
 
-        self.argv[1:] = ["\n"]
-        self.assertEqual(exec(self.argv), "\n")
+        self.argv[1:] = ['Hello', '', 'World!']
+        self.assertEqual(exec(self.argv), '!DLROw OLLEh')
 
-        self.argv[1:] = ["     \n"]
-        self.assertEqual(exec(self.argv), "\n     ")
+        self.argv[1:] = ['01234', '', '56789']
+        self.assertEqual(exec(self.argv), '9876543210')
 
-        self.argv[1:] = ["\n      "]
-        self.assertEqual(exec(self.argv), "      \n")
-
-    def test_two_string_argument(self):
-        self.argv.extend(['Hello', 'my Friend'])
-        self.assertEqual(exec(self.argv), 'DNEIRf YM OLLEh')
-
-        self.argv[1:] = ['    Hello   ', ' my Friend   ']
-        self.assertEqual(exec(self.argv), 'DNEIRf YM OLLEh')
-
-        self.argv[1:] = ['', '']
-        self.assertEqual(exec(self.argv), '')
-
-        self.argv[1:] = [' ', ' ']
-        self.assertEqual(exec(self.argv), '')
-
-        self.argv[1:] = ["\n", "\n"]
-        self.assertEqual(exec(self.argv), "\n \n")
-
-    def test_three_string_with_spaces_front_back_argument(self):
-        self.argv.extend(['    Hello   ', '     ', ' my Friend   '])
-        self.assertEqual(exec(self.argv), 'DNEIRf YM OLLEh')
-
-        self.argv[1:] = ['    Hello   ', '', ' my Friend   ']
-        self.assertEqual(exec(self.argv), 'DNEIRf YM OLLEh')
-
-        self.argv[1:] = ['', '', '']
-        self.assertEqual(exec(self.argv), '')
-
-        self.argv[1:] = ["\n", '', "\n"]
-        self.assertEqual(exec(self.argv), "\n \n")
 
 
 if __name__ == '__main__':
