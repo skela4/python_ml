@@ -1,33 +1,27 @@
 import sys
 
-
-def is_argument_integer(argv):
+def is_integer(x):
     try:
-        argv[0] = int(argv[0])
+        int(x)
         return True
-    except ValueError as error:
+    except ValueError:
         return False
-
 
 def whois(argv):
     try:
-        assert is_argument_integer(argv), "argument is not integer"
+        assert 0 < len(argv[1:]) , f"Usage: {argv[0]} INTEGER"
+        assert len(argv[1:]) < 2, "AssertionError: more than one argument is provided"
+        assert is_integer(argv[1]), "AssertionError: argument is not integer"
     except AssertionError as error:
-        print(f"{type(error).__name__}: {error}")
+        return f"{error}"
     else:
-        if (argv[0] == 0):
-            print("I'm Zero")
-        elif (argv[0] % 2 == 0):
-            print("I'm Even")
+        if (int(argv[1]) == 0):
+            return "I'm Zero"
+        elif (int(argv[1]) % 2 == 0):
+            return "I'm Even"
         else:
-            print("I'm Odd")
+            return "I'm Odd"
 
 
 if __name__ == "__main__":
-    try:
-        assert len(sys.argv[1:]) > 0, f"Usage: {sys.argv[0]} INTEGER"
-        assert len(sys.argv[1:]) < 2, "more than one argument is provided"
-    except AssertionError as error:
-        print(f"{type(error).__name__}: {error}")
-    else:
-        whois(sys.argv[1:])
+    print(whois(sys.argv))
