@@ -1,5 +1,6 @@
-def whois(argv):
-    
+import sys
+
+
 def is_argument_integer(argv):
     try:
         argv[0] = int(argv[0])
@@ -30,6 +31,3 @@ if __name__ == "__main__":
         print(f"{type(error).__name__}: {error}")
     else:
         whois(sys.argv[1:])
-
-if __name__ == "__main__":
-    print(whois(['exec.py', ' ', ' ']))

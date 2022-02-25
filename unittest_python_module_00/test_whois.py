@@ -1,70 +1,30 @@
 import unittest
-from ex02.whois import exec
+from ex02.whois import whois
 
 
-class ExecTest(unittest.TestCase):
+class WhoisTest(unittest.TestCase):
     """
     Test Case for ex02/whois.py
     """
 
     def setUp(self):
-        self.argv = ['exec.py']
+        self.argv = ['whois.py']
 
     def test_no_argument(self):
-        self.assertEqual(exec(self.argv), f"Usage: {self.argv[0]} STRING...")
+        self.assertEqual(whois(self.argv), f"Usage: {self.argv[0]} INTEGER")
 
-    def test_one_string_argument(self):
-        self.argv.extend(['Hello World!'])
-        self.assertEqual(exec(self.argv), '!DLROw OLLEh')
+    def test_one_integer(self):
+        self.argv.extend([12])
+        self.assertEqual(whois(self.argv), 12)
 
-    def test_two_string_argument(self):
-        self.argv.extend(['Hello', 'my Friend'])
-        self.assertEqual(exec(self.argv), 'DNEIRf YM OLLEh')
+        self.argv[1:] = [3]
+        self.assertEqual(whois(self.argv), 3)
 
-    def test_two_string_with_spaces_front_back_argument(self):
-        self.argv.extend(['    Hello   ', ' my Friend   '])
-        self.assertEqual(exec(self.argv), 'DNEIRf YM OLLEh')
+        self.argv[1:] = [0]
+        self.assertEqual(whois(self.argv), 0)
 
-    def test_three_string_with_spaces_front_back_argument(self):
-        self.argv.extend(['    Hello   ', '     ', ' my Friend   '])
-        self.assertEqual(exec(self.argv), 'DNEIRf YM OLLEh')
-
-    def test_three_string_with_one_empty_argument(self):
-        self.argv.extend(['    Hello   ', '', ' my Friend   '])
-        self.assertEqual(exec(self.argv), 'DNEIRf YM OLLEh')
-
-    def test_one_empty_string_argument(self):
-        self.argv.extend([''])
-        self.assertEqual(exec(self.argv), '')
-
-    def test_two_empty_string_argument(self):
-        self.argv.extend(['', ''])
-        self.assertEqual(exec(self.argv), '')
-
-    def test_three_empty_string_argument(self):
-        self.argv.extend(['', '', ''])
-        self.assertEqual(exec(self.argv), '')
-
-    def test_one_string_with_one_space_argument(self):
-        self.argv.extend([' '])
-        self.assertEqual(exec(self.argv), '')
-
-    def test_two_string_with_one_space_argument(self):
-        self.argv.extend([' ', ' '])
-        self.assertEqual(exec(self.argv), '')
-
-    def test_one_no_printable_string_argument(self):
-        self.argv.extend(["\n"])
-        self.assertEqual(exec(self.argv), "\n")
-
-    def test_two_no_printable_string_argument(self):
-        self.argv.extend(["\n", "\n"])
-        self.assertEqual(exec(self.argv), "\n \n")
-
-    def test_two_no_printable_and_one_empty_string_argument(self):
-        self.argv.extend(["\n", '', "\n"])
-        self.assertEqual(exec(self.argv), "\n \n")
-
+        self.argv[1:] = [12, 3]
+        self.assertEqual(whois(self.argv), "AssertionError: more than one argument is provided")
 
 if __name__ == '__main__':
     unittest.main()
