@@ -10,8 +10,8 @@ class WhoisTest(unittest.TestCase):
     def setUp(self):
         self.argv = ['whois.py']
 
-    # def test_no_argument(self):
-    #     self.assertEqual(whois(self.argv), f"Usage: {self.argv[0]} INTEGER")
+    def test_no_argument(self):
+        self.assertEqual(whois(self.argv), f"Usage: {self.argv[0]} INTEGER")
 
     def test_one_argument(self):
         self.argv.extend(['12'])

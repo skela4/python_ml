@@ -1,5 +1,6 @@
 import sys
 
+
 def is_integer(x):
     try:
         int(x)
@@ -7,13 +8,14 @@ def is_integer(x):
     except ValueError:
         return False
 
+
 def whois(argv):
     try:
-        assert 0 < len(argv[1:]) , f"Usage: {argv[0]} INTEGER"
-        assert len(argv[1:]) < 2, "AssertionError: more than one argument is provided"
-        assert is_integer(argv[1]), "AssertionError: argument is not integer"
+        assert 0 < len(argv[1:]), f"Usage: {argv[0]} INTEGER"
+        assert len(argv[1:]) < 2, "more than one argument is provided"
+        assert is_integer(argv[1]), "argument is not integer"
     except AssertionError as error:
-        return f"{error}"
+        return f"{AssertionError.__name__}: {error}"
     else:
         if (int(argv[1]) == 0):
             return "I'm Zero"
