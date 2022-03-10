@@ -38,7 +38,8 @@ lower characters, punctuation and spaces in a given text"""
         return None
 
     if (not isinstance(text, str) and text is not None):
-        raise SystemExit("argument is not a string")
+        print("argument is not a string")
+        return None
 
     if text is not None or len(text) == 0:
         text = input('What is the text to analyse?\n')

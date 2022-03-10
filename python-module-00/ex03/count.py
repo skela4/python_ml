@@ -1,4 +1,3 @@
-from cgitb import text
 import string
 
 dict_char = {
@@ -26,8 +25,13 @@ def text_analyzer(text="", *arg):
     """This function counts the number of upper characters,\n\
 lower characters, punctuation and spaces in a given text"""
 
-    if len(arg) > 0:
-        raise SystemExit("ERROR")
+    try:
+        assert len(arg) == 0, f"Usage: {sys.argv[0]} STRING"
+    except AssertionError as error:
+        return f"{error}"
+
+    # if len(arg) > 0:
+    #     raise SystemExit("ERROR")
 
     if len(text) == 0:
         text = input('What is the text to analyse?\n')
