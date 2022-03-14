@@ -36,7 +36,7 @@ def operation(a, b):
     print_pad("Difference:", a - b)
     print_pad("Product:", a * b)
     if (b == 0):
-        print_pad("Quotient", "ERROR (div by zero)")
+        print_pad("Quotient", "ERROR (division by zero)")
         print_pad("Remainder", "ERROR (modulo by zero)")
     else:
         print_pad("Quotient", a / b)
