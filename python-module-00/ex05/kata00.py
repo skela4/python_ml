@@ -1,4 +1,4 @@
-t = (19,)
+kata = (19, 42, 21)
 
 
 def build_iterable(iterable):
@@ -15,9 +15,10 @@ def build_iterable(iterable):
                 result.append(elem)
     except AssertionError as error:
         raise SystemExit(f"{AssertionError.__name__}: {error}")
-    typo = 'numbers are' if len(result) > 1 else 'number is'
-    print(f"the {len(result)} {typo}: {', '.join(map(str, result))}")
+    else:
+        typo = 'numbers are' if len(result) > 1 else 'number is'
+        print(f"the {len(result)} {typo}: {', '.join(map(str, result))}")
 
 
 if __name__ == "__main__":
-    build_iterable(t)
+    build_iterable(kata)
