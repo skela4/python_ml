@@ -1,25 +1,23 @@
+t = (19, 42, 21)
+
 def build_iterable(iterable):
     result = []
     try:
+        assert len(iterable) is not 0, "kata is empty"
         assert isinstance(iterable, tuple), "input is not of type tuple"
-        assert len(iterable) > 0, "tuple is empty"
         for integer in iterable:
             try:
-                integer = int(integer)
-            except Exception:
-                pass
+                assert isinstance(integer, int), "tuple can only be filled with integer"
+            except AssertionError as error:
+                raise SystemExit(f"{AssertionError.__name__}: {error}")
             else:
                 result.append(integer)
-    except Exception as msg:
-        raise SystemExit(msg)
-    if len(result) > 0:
-        print(
-            f"the {len(result)} numbers are: {', '.join(map(str, result))}"
-        )
+    except AssertionError as error:
+        raise SystemExit(f"{AssertionError.__name__}: {error}")
+    if (len(result) is 1):
+        print(f"the {len(result)} number is: {', '.join(map(str, result))}")
     else:
-        print('tuple does not contain number')
-
+        print(f"the {len(result)} numbers are: {', '.join(map(str, result))}")
 
 if __name__ == "__main__":
-    t = ("19", "42", "21", "78", "8674")
     build_iterable(t)
