@@ -107,7 +107,52 @@ def print_options(list_options):
         print(f"{option_number}: {option_text}")
 
 
+def is_cookbook_valid():
+    default = ['ingredients', 'meal', 'prep_time', 'vfd']
+    try:
+        assert isinstance(cookbook, dict), "cookbook need to be dictionnary"
+        for recipe in cookbook:
+            assert isinstance(cookbook[recipe], dict), "recipe need to be dictionnary"
+            assert len(cookbook[recipe]) >= 3, "the recipe book need to store at least 3 couples key-value"
+            # for key in recipe.keys():
+            #     print(key)  
+            # result = [elem in default for elem in cookbook[recipe].keys()]
+            result = []
+            # for elem in cookbook[recipe].keys():
+            #     if elem in default:
+            #         result.append(True)
+            #     else:
+            #         result.append(False)
+            for elem in default:
+                if elem in cookbook[recipe].keys():
+                    result.append(True)
+                else:
+                    result.append(False)
+            
+                    # print(elem)
+            result = list(filter(lambda x: x == True, result))
+            assert len(result) >= 3, (
+                "need to have at least "
+                "'ingredients', 'meal', 'prep_time' as keys"
+            )
+            # result = all()
+            # print(result)
+
+            
+                # for ingredient in cookbook[recipe]:
+            # for ingredient in recipe:
+                # assert all([isinstance(e, str) for e in list_ingredient]), (
+                #     "each ingredients need to be a string"
+                # )
+
+
+    except AssertionError as error:
+        raise(SystemExit(f"{AssertionError.__name__}: {error}"))
+
 def program_cookbook():
+
+    is_cookbook_valid()
+    raise(SystemExit("STOP"))
     list_options = {
         '1': 'Add a recipe',
         '2': 'Delete a recipe',
