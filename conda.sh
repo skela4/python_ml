@@ -32,14 +32,14 @@ function when_conda_exist {
 }
 
 function set_conda {
-    MINICONDA_PATH="/goinfre/$USER/miniconda3"
+    MINICONDA_PATH="/Users/$USER/miniconda3"
 	CONDA=$MINICONDA_PATH"/bin/conda"
 	PYTHON_PATH=$(which python)
 	REQUIREMENTS="jupyter numpy pandas pycodestyle"
 	SCRIPT=$(which_dl)
 	MY_SHELL=$(which_shell)
 	DL_LINK="https://repo.anaconda.com/miniconda/"$SCRIPT
-	DL_LOCATION="/tmp/"
+	DL_LOCATION="/Users/$USER/python_ml/"
 	printf "Checking conda: "
 	TEST=$(conda -h 2>/dev/null)
 	if [ $? == 0 ] ; then
