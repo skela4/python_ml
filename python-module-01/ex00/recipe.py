@@ -1,10 +1,10 @@
 class Recipe:
-    def __init__(self, name, recipe_type, description = ''):
+    def __init__(self, name, recipe_type, cooking_lvl, cook description = ''):
         self.name = name
         self.cooking_lvl = int(0)
         self.cooking_time = int
-        self.description = description
         self.ingredients = list(['vdf','vfd','vfd', 'vfd'])
+        self.description = description
         self.recipe_type = recipe_type
 
     def __str__(self):
@@ -36,9 +36,6 @@ class Recipe:
         accept_recipe_type = ['starter', 'lunch', 'dessert']
         to_assert = [self.recipe_type == type_recipe for type_recipe in accept_recipe_type]
         assert any(to_assert), 'can be "starter", "lunch" or "dessert" '
-        # assert self.recipe_type == 'starter' or self.recipe_type == 'lunch'  or self.recipe_type == 'dessert' , (
-        #     "list of all ingredients each represented by a string"
-        # )
         return self.recipe_type
 
 
