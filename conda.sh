@@ -39,7 +39,8 @@ function set_conda {
 	SCRIPT=$(which_dl)
 	MY_SHELL=$(which_shell)
 	DL_LINK="https://repo.anaconda.com/miniconda/"$SCRIPT
-	DL_LOCATION="/Users/$USER/python_ml/"
+	# DL_LOCATION="/Users/$USER/python_ml/"
+	DL_LOCATION="/Users/$USER/Desktop/pythongithubskela/"
 	printf "Checking conda: "
 	TEST=$(conda -h 2>/dev/null)
 	if [ $? == 0 ] ; then

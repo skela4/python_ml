@@ -1,9 +1,10 @@
+import string
 class Recipe:
-    def __init__(self, name, recipe_type, cooking_lvl, cook description = ''):
+    def __init__(self, name, cooking_lvl, cooking_time, ingredients, recipe_type, description = ''):
         self.name = name
         self.cooking_lvl = int(0)
         self.cooking_time = int
-        self.ingredients = list(['vdf','vfd','vfd', 'vfd'])
+        self.ingredients = ingredients
         self.description = description
         self.recipe_type = recipe_type
 
@@ -27,25 +28,30 @@ class Recipe:
         return self.cooking_time
 
     def get_ingredients(self):
-        to_assert = [isinstance(self.ingredients, list)]
-        [to_assert.append(isinstance(e, str)) for e in self.ingredients]
+        assert isinstance(self.ingredients, list), "ingredients need to be a list"
+        for e in self.ingredients:
+            to_assert.append(isinstance(e, str) and len(e.strip(string.whitespace)) > 0)
         assert all(to_assert), "list of all ingredients each represented by a string"
         return self.ingredients
-    
+
+    def get_description(self):
+        assert isinstance(self.description, str), "description need to be a string"
+        return self.description
+
     def get_recipe_type(self):
-        accept_recipe_type = ['starter', 'lunch', 'dessert']
-        to_assert = [self.recipe_type == type_recipe for type_recipe in accept_recipe_type]
+        to_assert = [self.recipe_type == e for e in ['starter', 'lunch', 'dessert']]
         assert any(to_assert), 'can be "starter", "lunch" or "dessert" '
         return self.recipe_type
 
 
 if __name__ == '__main__':
-    tourte = Recipe('tourte', 'starter', 'une simple tourte')
+    tourte = Recipe(name='tourte', cooking_lvl=2, cooking_time=60, ingredients=['oil', ''], recipe_type='starter', description='une simple tourte')
     try:
-        name = tourte.get_name()
-        print(name)
-        tourte.get_cooking_lvl()
+        # name = tourte.get_name()
+        # print(name)
+        # tourte.get_cooking_lvl()
+        # tourte.get_cooking_time()
         tourte.get_ingredients()
-        tourte.get_recipe_type()
+        # tourte.get_recipe_type()
     except AssertionError as error:
         raise SystemExit(f"{AssertionError.__name__}: {error}")
