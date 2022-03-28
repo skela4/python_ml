@@ -3,50 +3,50 @@ from datetime import datetime
 
 class Recipe:
     def __init__(self, name, cooking_lvl, cooking_time, ingredients, recipe_type, description = ''):
-        self.name = name
-        self.cooking_lvl = cooking_lvl
-        self.cooking_time = cooking_time
-        self.ingredients = ingredients
-        self.description = description
-        self.recipe_type = recipe_type
+        self.name = self.set_name(name)
+        self.cooking_lvl = self.set_cooking_lvl(cooking_lvl)
+        self.cooking_time = self.set_cooking_time(cooking_time)
+        self.ingredients = self.set_ingredients(ingredients)
+        self.description = self.set_description(description)
+        self.recipe_type = self.set_recipe_type(recipe_type)
 
     def __str__(self):
         return self.description
         pass
 
-    def get_name(self):
-        assert isinstance(self.name, str), "name need to be a string"
-        assert len(self.name) > 0, "name cannot be empty"
-        return self.name
+    def set_name(self, name):
+        assert isinstance(name, str), "name need to be a string"
+        assert len(name) > 0, "name cannot be empty"
+        return name
 
-    def get_cooking_lvl(self):
-        assert isinstance(self.cooking_lvl, int), "cooking level need to be a integer"
-        assert self.cooking_lvl >= 0 and self.cooking_lvl <= 5 , "range from 1 to 5"
-        return self.cooking_lvl
+    def set_cooking_lvl(self, cooking_lvl):
+        assert isinstance(cooking_lvl, int), "cooking level need to be a integer"
+        assert cooking_lvl >= 0 and cooking_lvl <= 5 , "range from 1 to 5"
+        return cooking_lvl
 
-    def get_cooking_time(self):
-        assert isinstance(self.cooking_time, int), "(int) name need to be a integer"
-        assert self.cooking_time >= 0, "(int) range from 0 to infinity"
-        return self.cooking_time
+    def set_cooking_time(self, cooking_time):
+        assert isinstance(cooking_time, int), "(int) name need to be a integer"
+        assert cooking_time >= 0, "(int) range from 0 to infinity"
+        return cooking_time
 
-    def get_ingredients(self):
-        assert isinstance(self.ingredients, list), "ingredients need to be a list"
+    def set_ingredients(self, ingredients):
+        assert isinstance(ingredients, list), "ingredients need to be a list"
         to_assert = []
-        for e in self.ingredients:
+        for e in ingredients:
             assert isinstance(e, str), "element in ingredients need to be a string"
             assert len(e.strip(string.whitespace)) > 0, (
                 "element in ingredients cannot be empty"
             )
-        return self.ingredients
+        return ingredients
 
-    def get_description(self):
-        assert isinstance(self.description, str), "description need to be a string"
-        return self.description
+    def set_description(self, description):
+        assert isinstance(description, str), "description need to be a string"
+        return description
 
-    def get_recipe_type(self):
-        to_assert = [self.recipe_type == e for e in ['starter', 'lunch', 'dessert']]
+    def set_recipe_type(self, recipe_type):
+        to_assert = [recipe_type == e for e in ['starter', 'lunch', 'dessert']]
         assert any(to_assert), 'can be "starter", "lunch" or "dessert" '
-        return self.recipe_type
+        return recipe_type
 
 class Book:
     def __init__(self, name = "book of recipes"):
@@ -66,19 +66,21 @@ class Book:
 
     def get_recipe_by_name(self, name):
 
-        def generator():
-            recipe_list = [
-                *self.recipes_list["starter"],
-                *self.recipes_list["lunch"],
-                *self.recipes_list["dessert"]
-            ]
-            for e in recipe_list:
-                yield e
+        for k, v in self.recipes_list.items():
+            print(k, v)
+        # recipe_list = [
+        #     *self.recipes_list["starter"],
+        #     *self.recipes_list["lunch"],
+        #     *self.recipes_list["dessert"]
+        # ]
+        # for e in recipe_list:
+        #     yield e
 
-        for e in generator():
+        # for e in generator():
+        #     if e.name == name:
 
-            print(e.name)
-            # recipe_list.append(*e)
+        #     print(e.name)
+        #     # recipe_list.append(*e)
             # recipe_list = [*recipe_list, *v]
             # print(recipe_list)
 
