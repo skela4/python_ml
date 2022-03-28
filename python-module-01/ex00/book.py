@@ -65,21 +65,28 @@ class Book:
         pass
 
     def get_recipe_by_name(self, name):
-        recipe_list = [
-            self.recipes_list["starter"]
-            self.recipes_list["lunch"]
-            self.recipes_list["dessert"]
-        }
-        for e, v in self.recipes_list.items():
-            print(e, v)
-            # recipe_list.append(*e)
-            recipe_list = [*recipe_list, *v]
-            print(recipe_list)
 
-        for e in recipe_list:
-            if e.name == name:
-                return e
-        return None
+        def generator():
+            recipe_list = [
+                *self.recipes_list["starter"],
+                *self.recipes_list["lunch"],
+                *self.recipes_list["dessert"]
+            ]
+            for e in recipe_list:
+                yield e
+
+        for e in generator():
+
+            print(e.name)
+            # recipe_list.append(*e)
+            # recipe_list = [*recipe_list, *v]
+            # print(recipe_list)
+
+
+        # for e in recipe_list:
+        #     if e.name == name:
+        #         return e
+        # return None
 
     def get_recipes_by_types(self, recipe_type):
         return self.recipes_list[recipe_type]
@@ -108,6 +115,6 @@ if __name__ == '__main__':
         first_book = Book()
         first_book.add_recipe(tourte)
         recipe = first_book.get_recipe_by_name('tourt')
-        print(recipe)
+        # print(recipe)
     except AssertionError as error:
         raise SystemExit(f"{AssertionError.__name__}: {error}")
