@@ -1,71 +1,38 @@
 import string
 from datetime import datetime
+from recipe import recipe
 
-class Recipe:
-    def __init__(self, name, cooking_lvl, cooking_time, ingredients, recipe_type, description = ''):
-        self.name = self.set_name(name)
-        self.cooking_lvl = self.set_cooking_lvl(cooking_lvl)
-        self.cooking_time = self.set_cooking_time(cooking_time)
-        self.ingredients = self.set_ingredients(ingredients)
-        self.description = self.set_description(description)
-        self.recipe_type = self.set_recipe_type(recipe_type)
-
-    def __str__(self):
-        return self.description
-        pass
-
-    def set_name(self, name):
-        assert isinstance(name, str), "name need to be a string"
-        assert len(name) > 0, "name cannot be empty"
-        return name
-
-    def set_cooking_lvl(self, cooking_lvl):
-        assert isinstance(cooking_lvl, int), "cooking level need to be a integer"
-        assert cooking_lvl >= 0 and cooking_lvl <= 5 , "range from 1 to 5"
-        return cooking_lvl
-
-    def set_cooking_time(self, cooking_time):
-        assert isinstance(cooking_time, int), "(int) name need to be a integer"
-        assert cooking_time >= 0, "(int) range from 0 to infinity"
-        return cooking_time
-
-    def set_ingredients(self, ingredients):
-        assert isinstance(ingredients, list), "ingredients need to be a list"
-        to_assert = []
-        for e in ingredients:
-            assert isinstance(e, str), "element in ingredients need to be a string"
-            assert len(e.strip(string.whitespace)) > 0, (
-                "element in ingredients cannot be empty"
-            )
-        return ingredients
-
-    def set_description(self, description):
-        assert isinstance(description, str), "description need to be a string"
-        return description
-
-    def set_recipe_type(self, recipe_type):
-        to_assert = [recipe_type == e for e in ['starter', 'lunch', 'dessert']]
-        assert any(to_assert), 'can be "starter", "lunch" or "dessert" '
-        return recipe_type
 
 class Book:
     def __init__(self, name = "book of recipes"):
-        self.name = name # name of the book
-        self.last_update = datetime.now(tz=None) # the date of the last update
-        self.creation_date = datetime.now(tz=None) # the creation date
+        self.name = name
+        self.creation_date = datetime.now(tz=None)
+        self.last_update = datetime.now(tz=None)
         self.recipes_list = {
             "starter" : [],
             "lunch": [],
             "dessert": []
         } # a dictionnary with 3 keys: "starter", "lunch", "dessert"
 
-    def __str__(self):
-        """Return the string to print with the recipe info"""
-        return ""
-        pass
+    @property
+    def name(self):
+        return self._name
+
+    @name.setter
+    def name(self, value):
+        self._name = value
+
+    @property
+    def creation_date(self):
+        return self.creation_date
+
+    @property
+    def last_update(self):
+        return self._last_update
+
 
     def get_recipe_by_name(self, name):
-
+        self._last_update = datetime.now(tz=None)
         for k, v in self.recipes_list.items():
             print(k, v)
         # recipe_list = [
@@ -98,6 +65,10 @@ class Book:
         recipe_type = recipe.recipe_type
         self.recipes_list[recipe_type].append(recipe)
         return None
+
+    def __str__(self):
+        """Return the string to print with the recipe info"""
+        return self.description
 
 
 if __name__ == '__main__':
